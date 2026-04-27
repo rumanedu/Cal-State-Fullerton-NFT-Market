@@ -1,0 +1,212 @@
+.marketplace-panel {
+  position: fixed;
+  right: 0;
+  top: 60px;
+  bottom: 0;
+  width: 380px;
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--border-subtle);
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+  animation: slideInRight 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+  overflow: hidden;
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Header */
+.panel-header {
+  position: relative;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.panel-header-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--building-color), transparent);
+}
+
+.panel-header-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 20px 20px 16px;
+}
+
+.panel-building-info { flex: 1; }
+
+.panel-building-code {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.panel-building-name {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+
+.panel-building-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.panel-close {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--border-subtle);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  margin-top: 2px;
+}
+
+.panel-close:hover {
+  border-color: #FF4F6A;
+  color: #FF4F6A;
+  background: rgba(255,79,106,0.1);
+}
+
+/* Stats */
+.panel-stats {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  border-top: 1px solid var(--border-subtle);
+  gap: 0;
+}
+
+.stat-item {
+  flex: 1;
+  text-align: center;
+}
+
+.stat-value {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.stat-label {
+  font-size: 10px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 2px;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 28px;
+  background: var(--border-subtle);
+}
+
+/* Tabs */
+.panel-tabs {
+  display: flex;
+  padding: 0 16px;
+  gap: 2px;
+  border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
+.panel-tab {
+  flex: 1;
+  padding: 12px 8px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.panel-tab:hover { color: var(--text-primary); }
+
+.panel-tab.active {
+  color: var(--building-color);
+  border-bottom-color: var(--building-color);
+}
+
+.tab-badge {
+  padding: 1px 6px;
+  border-radius: 10px;
+  background: var(--csuf-orange-dim);
+  color: var(--csuf-orange);
+  font-size: 10px;
+  font-family: var(--font-mono);
+}
+
+/* NFT grid */
+.panel-nfts {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Empty state */
+.panel-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--text-muted);
+  padding: 40px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.empty-cta {
+  padding: 8px 20px;
+  border-radius: 8px;
+  border: 1px solid var(--border-mid);
+  background: transparent;
+  color: var(--csuf-orange);
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.empty-cta:hover {
+  background: var(--csuf-orange-dim);
+  border-color: var(--csuf-orange);
+}

@@ -1,0 +1,11 @@
+.campus-scene-container {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.campus-scene-container canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}

@@ -1,0 +1,102 @@
+.hud {
+  position: fixed;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  z-index: 80;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.hud > * { pointer-events: auto; }
+
+/* Stats chip */
+.hud-stats {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 20px;
+}
+
+.hud-stat-text {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* Controls */
+.hud-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.hud-controls-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: 20px;
+  border: none;
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 12px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.hud-controls-toggle:hover { color: var(--text-primary); }
+
+.hud-hints {
+  border-radius: 12px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: fadeUp 0.2s ease;
+  min-width: 220px;
+}
+
+.hint-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* Selected indicator */
+.hud-selected {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 16px;
+  border-radius: 20px;
+  border-color: var(--bc) !important;
+  animation: fadeUp 0.3s ease;
+}
+
+.hud-selected-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--bc);
+  box-shadow: 0 0 8px var(--bc);
+}
+
+.hud-selected-text {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.hud-selected-text strong {
+  color: var(--text-primary);
+}
