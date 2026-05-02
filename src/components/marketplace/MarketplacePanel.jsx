@@ -22,6 +22,7 @@ export default function MarketplacePanel() {
     listedNFTs,
     auctions,
     buyNFT,
+    mintNFT,
     unlistNFT,
     addNotification,
     isGanache,
@@ -59,13 +60,25 @@ export default function MarketplacePanel() {
   };
 
   const handleBuy = async (nft) => {
-    if (!wallet) { addNotification('Connect your wallet to buy NFTs', 'warn'); connectWallet(); return; }
+    if (!wallet) {
+      addNotification('Connect your wallet to buy NFTs', 'warn');
+      connectWallet();
+      return;
+    }
+    
     setBuying(nft.id);
+    const isMint = !nft.onChainTokenId;
+    
     try {
-      await buyNFT(nft);
-      addNotification(`🎉 You now own "${nft.name}"!`, 'success');
+      if (isMint) {
+        await mintNFT(nft);
+        addNotification(`🔨 Successfully minted "${nft.name}"!`, 'success');
+      } else {
+        await buyNFT(nft);
+        addNotification(`🎉 You now own "${nft.name}"!`, 'success');
+      }
     } catch (err) {
-      addNotification(`Buy failed: ${err.message}`, 'error');
+      addNotification(`${isMint ? 'Mint' : 'Buy'} failed: ${err.message}`, 'error');
     } finally {
       setBuying(null);
     }

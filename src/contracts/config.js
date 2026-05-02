@@ -10,7 +10,7 @@
 //
 // ─────────────────────────────────────────────────────────────────────────────
 
-export const CONTRACT_ADDRESS = '0x1111BE0e3a143897F14A1401368a4683E5364f90'; // ← paste after deploy
+export const CONTRACT_ADDRESS = '0x54cd96315Fa86F0EaE163FbDFCA59a7AeDF2Dafd'; // ← paste after deploy
 
 // Ganache local network config (default Ganache GUI port)
 export const CHAIN_CONFIG = {

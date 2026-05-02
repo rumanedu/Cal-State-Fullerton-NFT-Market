@@ -454,7 +454,15 @@ export const useStore = create((set, get) => ({
       set({ walletBalance: parseFloat(ethers.formatEther(balance)).toFixed(4) });
 
       const mintedNFT = { ...nft, onChainTokenId, owner: wallet.shortAddress, available: false, listed: false };
-      set(state => ({ ownedNFTs: [...state.ownedNFTs, mintedNFT] }));
+      set(state => ({
+        ownedNFTs: [...state.ownedNFTs, mintedNFT],
+        nftCache: {
+          ...state.nftCache,
+          [nft.buildingId]: state.nftCache[nft.buildingId]?.map(n =>
+            n.id === nft.id ? mintedNFT : n
+          ),
+        },
+      }));
       get().addActivity(makeActivity('mint', mintedNFT, wallet.shortAddress, '0.01'));
       return mintedNFT;
     } else {
@@ -464,7 +472,7 @@ export const useStore = create((set, get) => ({
         nftCache: {
           ...state.nftCache,
           [nft.buildingId]: state.nftCache[nft.buildingId]?.map(n =>
-            n.id === nft.id ? { ...n, owner: wallet.shortAddress, available: false } : n
+            n.id === nft.id ? mintedNFT : n
           ),
         },
       }));
