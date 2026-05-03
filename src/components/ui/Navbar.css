@@ -191,8 +191,8 @@
   color: var(--text-muted);
 }
 
-/* Activity button */
-.navbar-activity-btn {
+/* Favorites & Activity buttons */
+.navbar-fav-btn, .navbar-activity-btn {
   position: relative;
   width: 34px;
   height: 34px;
@@ -207,18 +207,26 @@
   transition: all 0.2s ease;
   flex-shrink: 0;
 }
-.navbar-activity-btn:hover {
+
+.navbar-fav-btn:hover, .navbar-fav-btn.active {
+  border-color: #FF4F6A;
+  color: #FF4F6A;
+  background: rgba(255, 79, 106, 0.05);
+}
+
+.navbar-activity-btn:hover, .navbar-activity-btn.active {
   border-color: var(--csuf-orange);
   color: var(--csuf-orange);
+  background: rgba(255, 121, 0, 0.05);
 }
-.activity-count {
+
+.fav-count, .activity-count {
   position: absolute;
   top: -4px;
   right: -4px;
   min-width: 16px;
   height: 16px;
   border-radius: 8px;
-  background: #FF7900;
   color: #000;
   font-size: 9px;
   font-weight: 800;
@@ -227,6 +235,16 @@
   justify-content: center;
   padding: 0 3px;
   font-family: var(--font-mono);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.fav-count {
+  background: #FF4F6A;
+  color: white;
+}
+
+.activity-count {
+  background: #FF7900;
 }
 
 

@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { Heart, Eye, ShoppingCart, Tag, CheckCircle, Send, Gavel } from 'lucide-react';
+import { useStore } from '../../store';
 import { RARITY_COLORS, drawF } from '../../data/buildings';
 import './NFTCard.css';
 
@@ -8,7 +8,8 @@ function svgToDataUri(svg) {
 }
 
 export default function NFTCard({ nft, showSell, isBuying, onBuy, onSell, onTransfer, onUnlist, showUnlist, showAuction, onAuction }) {
-  const [liked, setLiked] = useState(false);
+  const { toggleFavorite, favoriteNFTs } = useStore();
+  const isLiked = favoriteNFTs.some(f => f.id === nft.id);
 
   const rarityColor = RARITY_COLORS[nft.rarity] || '#6B7A99';
   const svgStr = drawF(nft.fColor, nft.bg, 200, nft.effect, nft.hasHalo, nft.rotation, nft.uid || nft.id);
@@ -40,9 +41,9 @@ export default function NFTCard({ nft, showSell, isBuying, onBuy, onSell, onTran
             <div className="nft-token-id">#{nft.tokenId} · {nft.edition}</div>
             <div className="nft-name">{nft.name}</div>
           </div>
-          <button className={`nft-like ${liked ? 'liked' : ''}`} onClick={() => setLiked(!liked)}>
-            <Heart size={13} fill={liked ? 'currentColor' : 'none'} />
-            <span>{nft.likes + (liked ? 1 : 0)}</span>
+          <button className={`nft-like ${isLiked ? 'liked' : ''}`} onClick={(e) => { e.stopPropagation(); toggleFavorite(nft); }}>
+            <Heart size={13} fill={isLiked ? 'currentColor' : 'none'} />
+            <span>{nft.likes + (isLiked ? 1 : 0)}</span>
           </button>
         </div>
 

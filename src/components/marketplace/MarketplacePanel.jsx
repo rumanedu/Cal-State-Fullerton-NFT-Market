@@ -56,7 +56,7 @@ export default function MarketplacePanel() {
     Collection: applyFilters(collectionNFTs),
     'My NFTs':  applyFilters(myNFTs),
     Listed:     applyFilters(myListings),
-    Auctions:   buildingAuctions, // auctions don't filter by rarity
+    Auctions:   buildingAuctions,
   };
 
   const handleBuy = async (nft) => {

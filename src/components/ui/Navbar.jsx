@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, X, Wallet, ChevronDown, Layers, Activity } from 'lucide-react';
+import { Search, X, Wallet, ChevronDown, Layers, Activity, Heart } from 'lucide-react';
 import { useStore } from '../../store';
 import { CAMPUS_BUILDINGS } from '../../data/buildings';
 import './Navbar.css';
@@ -14,6 +14,7 @@ export default function Navbar() {
     setSelectedBuilding,
     isGanache,
     activityFeed, activityOpen, setActivityOpen,
+    favoriteNFTs, favoritesOpen, setFavoritesOpen,
   } = useStore();
 
   const [searchOpen, setSearchOpen] = useState(false);
@@ -89,9 +90,21 @@ export default function Navbar() {
         )}
       </div>
 
+      {/* Favorites button */}
+      <button
+        className={`navbar-fav-btn ${favoritesOpen ? 'active' : ''}`}
+        onClick={() => setFavoritesOpen(!favoritesOpen)}
+        title="Favorite NFTs"
+      >
+        <Heart size={16} fill={favoritesOpen ? 'currentColor' : 'none'} />
+        {favoriteNFTs.length > 0 && (
+          <span className="fav-count">{favoriteNFTs.length}</span>
+        )}
+      </button>
+
       {/* Activity Feed button */}
       <button
-        className="navbar-activity-btn"
+        className={`navbar-activity-btn ${activityOpen ? 'active' : ''}`}
         onClick={() => setActivityOpen(!activityOpen)}
         title="Activity Feed"
       >

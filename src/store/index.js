@@ -168,12 +168,15 @@ export const useStore = create((set, get) => ({
   activePanel: null,
   setActivePanel: (panel) => set({ activePanel: panel }),
   activityOpen: false,
-  setActivityOpen: (v) => set({ activityOpen: v }),
+  setActivityOpen: (v) => set({ activityOpen: v, favoritesOpen: false }),
+  favoritesOpen: false,
+  setFavoritesOpen: (v) => set({ favoritesOpen: v, activityOpen: false }),
 
   // ── NFT state ─────────────────────────────────────────────────────────────
   nftCache: {},
   ownedNFTs: [],
   listedNFTs: [],
+  favoriteNFTs: [],
 
   // ── Activity Feed ──────────────────────────────────────────────────────────
   activityFeed: [],
@@ -326,6 +329,9 @@ export const useStore = create((set, get) => ({
             : n
         ),
       },
+      favoriteNFTs: state.favoriteNFTs.map(f =>
+        f.id === nft.id ? { ...f, owner: wallet.shortAddress, available: false, listed: false } : f
+      ),
     }));
 
     get().addActivity(makeActivity('buy', nft, wallet.shortAddress, nft.priceEth));
@@ -362,6 +368,9 @@ export const useStore = create((set, get) => ({
           n.id === nft.id ? { ...n, priceEth, listed: true, available: true } : n
         ),
       },
+      favoriteNFTs: state.favoriteNFTs.map(f =>
+        f.id === nft.id ? { ...f, priceEth, listed: true, available: true } : f
+      ),
     }));
 
     get().addActivity(makeActivity('list', nft, wallet.shortAddress, priceEth));
@@ -389,6 +398,9 @@ export const useStore = create((set, get) => ({
           n.id === nft.id ? { ...n, listed: false, available: false } : n
         ),
       },
+      favoriteNFTs: state.favoriteNFTs.map(f =>
+        f.id === nft.id ? { ...f, listed: false, available: false } : f
+      ),
     }));
 
     get().addActivity(makeActivity('unlist', nft, wallet.shortAddress));
@@ -462,6 +474,9 @@ export const useStore = create((set, get) => ({
             n.id === nft.id ? mintedNFT : n
           ),
         },
+        favoriteNFTs: state.favoriteNFTs.map(f =>
+          f.id === nft.id ? mintedNFT : f
+        ),
       }));
       get().addActivity(makeActivity('mint', mintedNFT, wallet.shortAddress, '0.01'));
       return mintedNFT;
@@ -475,6 +490,9 @@ export const useStore = create((set, get) => ({
             n.id === nft.id ? mintedNFT : n
           ),
         },
+        favoriteNFTs: state.favoriteNFTs.map(f =>
+          f.id === nft.id ? mintedNFT : f
+        ),
       }));
       get().addActivity(makeActivity('mint', mintedNFT, wallet.shortAddress, '0.01'));
       return mintedNFT;
@@ -489,5 +507,17 @@ export const useStore = create((set, get) => ({
     setTimeout(() => set(state => ({
       notifications: state.notifications.filter(n => n.id !== id),
     })), 4500);
+  },
+  
+  toggleFavorite: (nft) => {
+    const { favoriteNFTs } = get();
+    const isFav = favoriteNFTs.some(f => f.id === nft.id);
+    if (isFav) {
+      set({ favoriteNFTs: favoriteNFTs.filter(f => f.id !== nft.id) });
+      get().addNotification(`💔 Removed "${nft.name}" from favorites`, 'info');
+    } else {
+      set({ favoriteNFTs: [...favoriteNFTs, nft] });
+      get().addNotification(`💖 Added "${nft.name}" to favorites`, 'success');
+    }
   },
 }));
