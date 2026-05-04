@@ -47,13 +47,22 @@ A premium, 3D interactive NFT marketplace built for the Cal State Fullerton comm
 *   **Node.js**: v18+ recommended.
 *   **Ganache**: [Download Ganache GUI](https://trufflesuite.com/ganache/) (Port 7545).
 *   **MetaMask**: Browser extension installed.
+*   **Git**: Version control system.
 
-### 2. Install Dependencies
+### 2. Clone the Repository
+Clone the project and navigate into the directory:
+```bash
+git clone https://github.com/rumanedu/Cal-State-Fullerton-NFT-Market.git
+cd Cal-State-Fullerton-NFT-Market
+```
+
+### 3. Install Dependencies
+The project correctly ignores the `node_modules` folder to prevent cross-environment corruption. You **must** install the dependencies locally after cloning:
 ```bash
 npm install
 ```
 
-### 3. Setup Local Blockchain (Ganache)
+### 4. Setup Local Blockchain (Ganache)
 1.  Open **Ganache GUI** and click **Quickstart**.
 2.  Ensure it is running on `http://127.0.0.1:7545`.
 3.  In **MetaMask**, add a custom network:
@@ -62,21 +71,21 @@ npm install
     *   **Chain ID**: `1337`
     *   **Currency**: ETH
 
-### 4. Deploy Smart Contracts
+### 5. Deploy Smart Contracts
 Run the deployment script to initialize the building collections:
 ```bash
 npx hardhat run scripts/deploy.cjs --network ganache
 ```
 *Note: This will print a contract address. Copy it.*
 
-### 5. Configure Frontend
+### 6. Configure Frontend
 1.  Open `src/contracts/config.js`.
 2.  Paste your deployed address into `CONTRACT_ADDRESS`:
     ```javascript
     export const CONTRACT_ADDRESS = '0xYourAddressHere';
     ```
 
-### 6. Run Development Server
+### 7. Run Development Server
 ```bash
 npm run dev
 ```
